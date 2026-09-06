@@ -2,6 +2,9 @@
 const nextConfig = {
   output: 'export',
   reactStrictMode: true,
-}
+  images: {
+    unoptimized: true,
+  },
+  basePath: process.env.NODE_ENV === 'production' ? '/N2' : '',
 
-export default nextConfig
+  export default nextConfig
