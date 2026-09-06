@@ -6,5 +6,6 @@ const nextConfig = {
     unoptimized: true,
   },
   basePath: process.env.NODE_ENV === 'production' ? '/N2' : '',
+}
 
-  export default nextConfig
+module.exports = nextConfig
