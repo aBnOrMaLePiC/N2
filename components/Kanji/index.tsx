@@ -93,6 +93,26 @@ const Kanji: FC<propType> = ({ level }) => {
                 </div>
               </div>
 
+              {/* jisho link */}
+              <div className="mt-2 flex items-center gap-2 text-sm text-gray-400">
+                <a
+                  href={`https://jisho.org/search/${item.character}%20%23kanji`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-gray-700 rounded px-3 py-1 text-sm text-gray-300"
+                >
+                  Radical &#8663;
+                </a>
+                <a
+                  href={`https://jisho.org/search/${item.character}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-gray-700 rounded px-3 py-1 text-sm text-gray-300"
+                >
+                  View in Jisho &#8663;
+                </a>
+              </div>
+
               {/* Matching vocabulary */}
               {matchedWords.length > 0 && (
                 <div className="mt-4 border-t border-gray-700 pt-4">
@@ -117,7 +137,7 @@ const Kanji: FC<propType> = ({ level }) => {
                         {/* Expand button */}
                         {matchedWords.length > 1 && (
                           <span className="rounded bg-gray-700 px-3 py-2 text-sm text-gray-300">
-                            + {matchedWords.length - 1} more
+                            + {matchedWords.length} more
                           </span>
                         )}
                       </div>

@@ -45,7 +45,7 @@ const Grammar: FC<propType> = ({ level }) => {
               <div className="flex items-center">
                 <div className="w-full flex flex-col">
                   {/* Pattern */}
-                  <div className="w-40 shrink-0 text-lg font-bold">
+                  <div className="w-full shrink-0 text-lg font-bold">
                     {item.pattern}
                   </div>
 

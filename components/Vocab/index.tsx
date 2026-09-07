@@ -44,22 +44,22 @@ const Vocab: FC<propType> = ({ level }) => {
               <div className="flex items-center gap-4">
                 <div className="w-full">
                   {/* Word */}
-                  <div className="w-32 shrink-0 text-2xl font-bold">
+                  <div className="w-full shrink-0 text-2xl font-bold">
                     {item.word}
                   </div>
 
                   {/* Reading */}
-                  <div className="w-36 shrink-0 text-gray-400">
+                  <div className="w-full text-gray-400">
                     {item.reading}
                   </div>
 
                   {/* Meaning */}
-                  <div className="flex-1 text-gray-200">
+                  <div className="text-gray-200">
                     {item.meanings.join(", ")}
                   </div>
 
                   {/* Level */}
-                  <div className="shrink-0 text-xs font-bold text-gray-400">
+                  <div className="text-xs font-bold text-gray-400">
                     {item.level}
                   </div>
                 </div>
