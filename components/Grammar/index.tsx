@@ -1,10 +1,10 @@
 import React, { FC } from "react"
 
-import gn1 from "../../resources/json/grammar/n1.json"
-import gn2 from "../../resources/json/grammar/n2.json"
-import gn3 from "../../resources/json/grammar/n3.json"
-import gn4 from "../../resources/json/grammar/n4.json"
-import gn5 from "../../resources/json/grammar/n5.json"
+import vn1 from "../../resources/grammar/n1.json"
+import vn2 from "../../resources/grammar/n2.json"
+import vn3 from "../../resources/grammar/n3.json"
+import vn4 from "../../resources/grammar/n4.json"
+import vn5 from "../../resources/grammar/n5.json"
 
 type Example = {
   ja: string
@@ -20,14 +20,18 @@ type GrammarType = {
   tags?: string[]
 }
 
-const Grammar: FC = () => {
-  const grammar: GrammarType[] = [
-    ...(gn5 as GrammarType[]),
-    ...(gn4 as GrammarType[]),
-    ...(gn3 as GrammarType[]),
-    ...(gn2 as GrammarType[]),
-    ...(gn1 as GrammarType[]),
-  ]
+type propType = {
+  level: boolean[]
+}
+
+const Grammar: FC<propType> = ({ level }) => {
+  const grammar = [
+    ...(level[0] ? vn5 : []),
+    ...(level[1] ? vn4 : []),
+    ...(level[2] ? vn3 : []),
+    ...(level[3] ? vn2 : []),
+    ...(level[4] ? vn1 : []),
+  ] as GrammarType[]
 
   return (
     <div className="w-full p-4">
@@ -38,26 +42,30 @@ const Grammar: FC = () => {
             className="rounded-lg bg-bgray-800"
           >
             <summary className="cursor-pointer list-none p-4">
-              <div className="flex items-center gap-4">
-                {/* Pattern */}
-                <div className="w-40 shrink-0 text-lg font-bold">
-                  {item.pattern}
-                </div>
+              <div className="flex items-center">
+                <div className="w-full flex flex-col">
+                  {/* Pattern */}
+                  <div className="w-40 shrink-0 text-lg font-bold">
+                    {item.pattern}
+                  </div>
 
-                {/* Meaning */}
-                <div className="flex-1 text-gray-200">
-                  {item.meaning}
-                </div>
+                  {/* Meaning */}
+                  <div className="text-gray-200">
+                    {item.meaning}
+                  </div>
 
-                {/* Level */}
-                <div className="w-12 shrink-0 text-center text-xs font-bold text-gray-400">
-                  {item.level}
+                  {/* Level */}
+                  <div className="text-xs font-bold text-gray-400">
+                    {item.level}
+                  </div>
                 </div>
 
                 {/* Expand indicator */}
-                <div className="text-gray-500">
-                  {item.examples?.length ? "＋" : ""}
-                </div>
+                {item.examples?.length && (
+                  <div className="text-gray-500">
+                    ＋
+                  </div>
+                )}
               </div>
             </summary>
 

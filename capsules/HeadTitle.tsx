@@ -9,7 +9,6 @@ const HeadTitle: React.FC<propType> = ({ children }) => {
   return (
     <Head>
       <title>{children}</title>
-      <link rel="icon" href="next_images/favicon.ico" />
     </Head>
   )
 }

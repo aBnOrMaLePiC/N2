@@ -1,16 +1,17 @@
 import { FC } from "react"
 
-import kn1 from "../../resources/json/kanji/n1.json"
-import kn2 from "../../resources/json/kanji/n2.json"
-import kn3 from "../../resources/json/kanji/n3.json"
-import kn4 from "../../resources/json/kanji/n4.json"
-import kn5 from "../../resources/json/kanji/n5.json"
+import kn1 from "../../resources/kanji/n1.json"
+import kn2 from "../../resources/kanji/n2.json"
+import kn3 from "../../resources/kanji/n3.json"
+import kn4 from "../../resources/kanji/n4.json"
+import kn5 from "../../resources/kanji/n5.json"
 
-import vn1 from "../../resources/json/vocab/n1.json"
-import vn2 from "../../resources/json/vocab/n2.json"
-import vn3 from "../../resources/json/vocab/n3.json"
-import vn4 from "../../resources/json/vocab/n4.json"
-import vn5 from "../../resources/json/vocab/n5.json"
+import vn1 from "../../resources/vocab/n1.json"
+import vn2 from "../../resources/vocab/n2.json"
+import vn3 from "../../resources/vocab/n3.json"
+import vn4 from "../../resources/vocab/n4.json"
+import vn5 from "../../resources/vocab/n5.json"
+import { VocabType } from "../Vocab"
 
 type KanjiType = {
   character: string
@@ -23,35 +24,20 @@ type KanjiType = {
   meanings: string[]
 }
 
-type ExampleType = {
-  ja: string
-  en: string
+type propType = {
+  level: boolean[]
 }
 
-type VocabType = {
-  word: string
-  reading: string
-  meanings: string[]
-  level: string
-  examples: ExampleType[]
-}
+const Kanji: FC<propType> = ({ level }) => {
+  const kanji = [
+    ...(level[0] ? kn5 : []),
+    ...(level[1] ? kn4 : []),
+    ...(level[2] ? kn3 : []),
+    ...(level[3] ? kn2 : []),
+    ...(level[4] ? kn1 : []),
+  ] as KanjiType[]
 
-const Kanji: FC = () => {
-  const kanji: KanjiType[] = [
-    ...(kn5 as KanjiType[]),
-    ...(kn4 as KanjiType[]),
-    ...(kn3 as KanjiType[]),
-    ...(kn2 as KanjiType[]),
-    ...(kn1 as KanjiType[]),
-  ]
-
-  const vocab: VocabType[] = [
-    ...(vn5 as VocabType[]),
-    ...(vn4 as VocabType[]),
-    ...(vn3 as VocabType[]),
-    ...(vn2 as VocabType[]),
-    ...(vn1 as VocabType[]),
-  ]
+  const vocab = [...vn5, ...vn4, ...vn3, ...vn2, ...vn1] as VocabType[]
 
   return (
     <div className="w-full p-4">
@@ -140,7 +126,7 @@ const Kanji: FC = () => {
                     {/* Remaining words */}
                     {matchedWords.length > 1 && (
                       <div className="mt-2 grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
-                        {matchedWords.slice(1).map((word) => (
+                        {matchedWords.map((word) => (
                           <div
                             key={`${word.word}-${word.reading}`}
                             className="rounded bg-bgray-900 p-3"

@@ -1,10 +1,8 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import dynamic from "next/dynamic"
-import AxiosInterceptor from "../api/AxiosInterceptor"
 import { memo, Suspense } from "react"
 import ErrorBoundary from "@/capsules/ErrorBoundary"
-import "../base/components/FontawesomeIcons"
 import FontProvider from "./FontProvider"
 
 const App = ({ Component, pageProps }: AppProps) => {
@@ -14,9 +12,7 @@ const App = ({ Component, pageProps }: AppProps) => {
       <SafeHydrate>
         <FontProvider>
           <Suspense fallback={<div>Loading translations...</div>}>
-            <AxiosInterceptor>
-              <Component {...pageProps} />
-            </AxiosInterceptor>
+            <Component {...pageProps} />
           </Suspense>
         </FontProvider>
       </SafeHydrate>

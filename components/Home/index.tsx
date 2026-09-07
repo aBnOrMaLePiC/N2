@@ -13,30 +13,36 @@ export const enum menuType {
 
 const Home: FC = () => {
   const [menu, setMenu] = useState<menuType>(menuType.kanji)
+  const [level, setLevel] = useState<boolean[]>([true, true, true, true, false]) // [N5, N4, N3, N2, N1]
 
   return (
-    <div className="bg-bgray-900 text-white text-base min-h-screen overflow-auto">
+    <div className="relative pt-36 bg-bgray-900 text-white text-base min-h-screen overflow-auto">
       {/* Tab title */}
       <HeadTitle>
         N2
       </HeadTitle>
 
-      <Header menu={menu} setMenu={setMenu} />
+      <Header
+        menu={menu}
+        setMenu={setMenu}
+        level={level}
+        setLevel={setLevel}
+      />
 
       <div>
         {menu === menuType.kanji && (
           <div className="w-full">
-            <Kanji />
+            <Kanji level={level} />
           </div>
         )}
         {menu === menuType.vocab && (
           <div className="w-full">
-            <Vocab />
+            <Vocab level={level} />
           </div>
         )}
         {menu === menuType.grammar && (
           <div className="w-full">
-            <Grammar />
+            <Grammar level={level} />
           </div>
         )}
       </div>

@@ -1,17 +1,17 @@
 import React, { FC } from "react"
 
-import vn1 from "../../resources/json/vocab/n1.json"
-import vn2 from "../../resources/json/vocab/n2.json"
-import vn3 from "../../resources/json/vocab/n3.json"
-import vn4 from "../../resources/json/vocab/n4.json"
-import vn5 from "../../resources/json/vocab/n5.json"
+import vn1 from "../../resources/vocab/n1.json"
+import vn2 from "../../resources/vocab/n2.json"
+import vn3 from "../../resources/vocab/n3.json"
+import vn4 from "../../resources/vocab/n4.json"
+import vn5 from "../../resources/vocab/n5.json"
 
 type Example = {
   ja: string
   en: string
 }
 
-type VocabType = {
+export type VocabType = {
   word: string
   reading: string
   meanings: string[]
@@ -19,14 +19,18 @@ type VocabType = {
   examples: Example[]
 }
 
-const Vocab: FC = () => {
-  const vocab: VocabType[] = [
-    ...(vn5 as VocabType[]),
-    ...(vn4 as VocabType[]),
-    ...(vn3 as VocabType[]),
-    ...(vn2 as VocabType[]),
-    ...(vn1 as VocabType[]),
-  ]
+type propType = {
+  level: boolean[]
+}
+
+const Vocab: FC<propType> = ({ level }) => {
+  const vocab = [
+    ...(level[0] ? vn5 : []),
+    ...(level[1] ? vn4 : []),
+    ...(level[2] ? vn3 : []),
+    ...(level[3] ? vn2 : []),
+    ...(level[4] ? vn1 : []),
+  ] as VocabType[]
 
   return (
     <div className="w-full p-4">
@@ -38,30 +42,34 @@ const Vocab: FC = () => {
           >
             <summary className="cursor-pointer list-none p-4">
               <div className="flex items-center gap-4">
-                {/* Word */}
-                <div className="w-32 shrink-0 text-2xl font-bold">
-                  {item.word}
-                </div>
+                <div className="w-full">
+                  {/* Word */}
+                  <div className="w-32 shrink-0 text-2xl font-bold">
+                    {item.word}
+                  </div>
 
-                {/* Reading */}
-                <div className="w-36 shrink-0 text-gray-400">
-                  {item.reading}
-                </div>
+                  {/* Reading */}
+                  <div className="w-36 shrink-0 text-gray-400">
+                    {item.reading}
+                  </div>
 
-                {/* Meaning */}
-                <div className="flex-1 text-gray-200">
-                  {item.meanings.join(", ")}
-                </div>
+                  {/* Meaning */}
+                  <div className="flex-1 text-gray-200">
+                    {item.meanings.join(", ")}
+                  </div>
 
-                {/* Level */}
-                <div className="w-12 shrink-0 text-center text-xs font-bold text-gray-400">
-                  {item.level}
+                  {/* Level */}
+                  <div className="shrink-0 text-xs font-bold text-gray-400">
+                    {item.level}
+                  </div>
                 </div>
 
                 {/* Expand indicator */}
-                <div className="text-gray-500">
-                  {item.examples?.length > 0 && "＋"}
-                </div>
+                {item.examples?.length > 0 && (
+                  <div className="text-gray-500">
+                    ＋
+                  </div>
+                )}
               </div>
             </summary>
 
